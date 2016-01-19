@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    url(r'^', include('bucketlist.urls')),
+    url(r'^api/', include('bucketlist.urls')),
+    url(r'^.*$', TemplateView.as_view(template_name='bucketlist/index.html'), name='index'),
     url(r'^admin/', admin.site.urls),
 ]

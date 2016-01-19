@@ -1,0 +1,147 @@
+/*Custom font for the sign Up and log in title*/
+@font-face {
+    font-family: auth_font;
+    src : url('../font/Pacifico.ttf');
+}
+
+/*Styles for the cards*/
+.card {
+    min-height: 170px;
+}
+
+.card .card-content{
+    min-height: 120px;
+}
+
+.card .card-action{
+    border-top: 0px;
+    padding: 10px;
+    text-align: right;
+}
+
+.card .card-action a{
+    color: #039be5;
+    cursor: pointer;
+}
+
+.card .card-action a:hover{
+    color: #039be5;
+}
+
+/*Styles for creating bucketlist and items to a bucketlist*/
+#bucket_form{
+}
+
+#bucket_form input{
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px; 
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 10px;
+    box-sizing: border-box;
+    /*width: inherit;*/
+}
+
+#bucket_form button{
+    height: inherit;
+    line-height: 39px;
+}
+
+#bucket_form input:focus {
+    border-color: #ccc;
+    box-shadow: 0 1px 0 0 #ccc;
+}
+
+/*Styles for creating bucketlist and items to a bucketlist*/
+#item_edit {
+    margin-bottom: 20px;
+}
+
+#item_edit input, #bucket_edit input{
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px; 
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 10px;
+    box-sizing: border-box;
+    /*width: inherit;*/
+}
+
+#item_edit button{
+    height: inherit;
+    line-height: 39px;
+    margin-top: 15px;
+}
+
+#bucket_edit button{
+    height: inherit;
+    line-height: 44px;
+}
+
+#item_edit input:focus , #bucket_edit input:focus {
+    border-color: #ccc;
+    box-shadow: 0 1px 0 0 #ccc;
+}
+
+
+/*Styles for the signup forms*/
+#signup_form {
+    -webkit-border-radius: 3px; 
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 10px;
+    background: #fafafa;
+}
+
+#signup_form h3 {
+    font-family: auth_font;
+}
+
+#signup_form input{
+	border: 1px solid #ccc;
+    -webkit-border-radius: 3px; 
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#signup_form p {
+	margin: 30px;
+}
+
+#signup_form button {
+	margin-top: 10px;
+}
+
+#signup_form .row {
+	margin-bottom: 0px;
+}
+
+#signup_form input {
+	background: #ffffff;
+}
+
+#signup_form input:focus {
+  	background: #ffffff;
+  	border-color: #fafafa;
+  	box-shadow: 0 1px 0 0 #fafafa;
+}
+
+.index_wrapper{
+	margin-top: 40px;
+}
+
+
+.nav-wrapper{
+    padding-right: 15px;
+    padding-left: 15px; 
+}
+
+.card-reveal{
+    font-size: 13px;
+}
+
+.card-action {
+    font-size: 14px;
+}

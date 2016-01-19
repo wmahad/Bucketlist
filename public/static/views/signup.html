@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="container">
+        <div class="row index_wrapper">
+            <div class="row">
+                <div class="col s6">
+                    <img class="responsive-img" src="/static/images/bucketlist.png">
+                </div>
+                <div class="col s6">
+                    <div class="col s12">
+                    	
+                        <form id="signup_form" class="z-depth-4" ng-submit="register()" novalidate>
+                            <h3 class="center blue-text">Sign Up here</h3>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="name" type="text" ng-model="user.username" placeholder="Enter username">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="password" ng-model="user.password" placeholder="Enter Password" class="validate">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="container center">
+                                    <button class="btn blue" type="submit">Sign Up</button>
+                                </div>
+                            </div>
+                            <p class="center">Already have an Account? <a ui-sref="login">Login</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

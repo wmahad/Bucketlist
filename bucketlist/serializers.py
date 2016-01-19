@@ -22,10 +22,11 @@ class BucketListItemSerializer(serializers.ModelSerializer):
 class BucketListSerializer(serializers.ModelSerializer):
 
     items = BucketListItemSerializer(many=True, read_only=True)
+    created_by = serializers.ReadOnlyField(source='created_by.username')
 
     class Meta:
         model = BucketList
         fields = ('id', 'name', 'items', 'date_created',
                   'date_modified', 'created_by')
-        read_only_fields = ('date_created', 'date_modified',
+        read_only_fields = ( 'date_created', 'date_modified',
                             'items')
