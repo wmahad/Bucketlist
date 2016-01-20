@@ -9,7 +9,8 @@ branches:
   only:
   - develop
 # command to run tests
-script: 
+script:
+  - ./manage.py migrate 
   - ./manage.py test
   - coverage run --omit='*virtualenv*' manage.py test
 after_success: coveralls
