@@ -73,7 +73,11 @@ app.factory('httpRequestInterceptor', function ($localStorage) {
     return {
         request: function(config) {
             var token = $localStorage.token;
-            config.headers['Authorization'] = 'Token ' + token;
+            config.headers = config.headers || {};
+            if (token) {
+                config.headers['Authorization'] = 'Token ' + token;
+            }
+            
             return config;
         }
     };

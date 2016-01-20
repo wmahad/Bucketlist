@@ -11,23 +11,25 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
     .state('signup', {
         url: '/signup',
         controller: 'AuthController',
-        templateUrl: '/static/views/signup.html'
+        templateUrl: '/static/views/signup.html',
+        module: 'public'
     })
 
     .state('login', {
         url: '/login',
         controller: 'AuthController',
-        templateUrl: '/static/views/login.html'
+        templateUrl: '/static/views/login.html',
+        module: 'public'
     })
 
     .state('logout', {
         url: '/logout',
         controller: function ($rootScope, $state, $localStorage, BucketListService) {
             BucketListService.UserAuth.logout(function () {
-                $localStorage.reset();
-                $state.go('signup');
+                $localStorage.$reset();
+                $state.go('signup', {}, {reload:true});
             });
-            $state.go('signup');
+            $state.go('signup', {}, {reload:true});
         },
         module: 'private'
     })
@@ -66,6 +68,10 @@ app.run(function($rootScope, $state, $localStorage) {
             // If logged out and transitioning to a logged in page:
             event.preventDefault();
             $state.go('login',{}, {reload:true});
+        } 
+        if (toState.module === 'public' && $localStorage.authenticated) {
+            event.preventDefault();
+            $state.go('dashboard',{}, {reload:true});
         }
 
     });
