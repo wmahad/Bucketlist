@@ -5,16 +5,19 @@ from django.db import models
 
 
 class BucketList(models.Model):  # on_delete=models.CASCADE
+    """Modal class for bucketlist"""
     name = models.CharField(blank=False, max_length=70)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User)
 
     def __str__(self):
+        """The str method for bucketlist"""
         return 'BucketList : {}'.format(self.name)
 
 
 class BucketListItem(models.Model):
+    """Modal class for bucketlist-item"""
     name = models.CharField(blank=False, max_length=70)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
@@ -23,4 +26,5 @@ class BucketListItem(models.Model):
         BucketList, on_delete=models.CASCADE, related_name='items')
 
     def __str__(self):
+        """The str method for bucketlist-item"""
         return 'Item : {}'.format(self.name)

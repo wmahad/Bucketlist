@@ -20,15 +20,19 @@ from rest_framework import generics, status
 
 
 class UserSignUpView(generics.CreateAPIView):
+    """The view set for User sign up"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class UserSignInView(generics.CreateAPIView):
+    """The view set for User sign in"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
     def create(self, request):
+        """method that handles login, recieves data in form of
+        json"""
         data = request.data
         try:
             user = User.objects.get(username=data.get('username'))
@@ -49,6 +53,7 @@ class UserSignInView(generics.CreateAPIView):
 
 
 class BucketDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """The view set for handling display of bucketlist details"""
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated,)
 
@@ -59,22 +64,30 @@ class BucketDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class BucketListView(generics.ListCreateAPIView):
+    """The view set for bucketlist creation"""
+    # setting aunthentication class for the viewsets
     authentication_classes = (TokenAuthentication,)
+    # Setting permission classes
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated,)
 
     queryset = BucketList.objects.all()
     serializer_class = BucketListSerializer
 
     def perform_create(self, serializer):
+        """Method for handling the actual creation"""
         serializer.save(created_by=self.request.user)
 
     def get_queryset(self):
+        """Modify query to display bucketlists for logged in user"""
         user = self.request.user
         return BucketList.objects.all().filter(created_by=user)
 
 
 class BucketListItemDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """The view set for handling items display"""
+    # setting aunthentication class for the viewsets
     authentication_classes = (TokenAuthentication,)
+    # Setting permission classes
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated,)
 
     queryset = BucketListItem.objects.all()
@@ -82,7 +95,10 @@ class BucketListItemDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class BucketListItemView(generics.ListCreateAPIView):
+    """The view set foe handling item creation"""
+    # setting aunthentication class for the viewsets
     authentication_classes = (TokenAuthentication,)
+    # Setting permission classes
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated,)
 
     queryset = BucketListItem.objects.all()
@@ -90,7 +106,10 @@ class BucketListItemView(generics.ListCreateAPIView):
 
 
 class LogoutView(APIView):
+    """The view set for handling user logout"""
+    # setting aunthentication class for the viewsets
     authentication_classes = (TokenAuthentication,)
+    # Setting permission classes
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated,)
 
     def get(self, request, format=None):
