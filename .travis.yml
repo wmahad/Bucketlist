@@ -10,7 +10,8 @@ branches:
   - develop
 # command to run tests
 script:
-  - ./manage.py migrate 
+  - ./manage.py migrate django.contrib.admin
+  - ./manage.py migrate bucketlist 
   - ./manage.py test
   - coverage run --omit='*virtualenv*' manage.py test
 after_success: coveralls
