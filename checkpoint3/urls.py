@@ -20,6 +20,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^api/', include('bucketlist.urls')),
+    url(r'^api-docs/', include('rest_framework_swagger.urls')),
     url(r'^.*$', TemplateView.as_view(template_name='bucketlist/index.html'), name='index'),
     url(r'^admin/', admin.site.urls),
 ]
