@@ -1,7 +1,7 @@
 
 # Bucket List app. [![Build Status](https://travis-ci.org/andela-engmkwalusimbi/Bucketlist.svg?branch=develop)](https://travis-ci.org/andela-engmkwalusimbi/Bucketlist) [![Coverage Status](https://coveralls.io/repos/github/andela-engmkwalusimbi/Bucketlist/badge.svg?branch=develop)](https://coveralls.io/github/andela-engmkwalusimbi/Bucketlist?branch=develop)
 
-`"Before the day i die i must touch the sky"`. Alot of people have such phrases. The app helps track the things you would want to do before the day you die.
+`"Before the day I die I must touch the sky"`. Alot of people have such phrases. The app helps track the things you would want to do before the day you die.
 ###Features
 View the [live demo](http://and-bucketlist.herokuapp.com/) and [documentation](http://and-bucketlist.herokuapp.com/api-docs/) of the application.
 
@@ -38,7 +38,6 @@ View the [live demo](http://and-bucketlist.herokuapp.com/) and [documentation](h
  Ensure your create `DATABASE_URL` and `SECRET` in your env variables.
 
 5. ######Managing Database set up
-
 To get started install Postgres on your local computer if you don’t have it already. if you haven't follow this [Setting up postgresql](http://www.postgresql.org/download/) and choose your appropriate OS.
 Run the following commands on the terminal to set up tables and manage upgrades to tables if you change your models.
 
