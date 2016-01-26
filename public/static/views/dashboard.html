@@ -1,11 +1,15 @@
 <div class="row">
     <nav>
         <div class="nav-wrapper blue darken-3">
-            <a ui-sref="dashboard" class="brand-logo">Bucket List</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <div class="col m12 s12">
+            <a ui-sref="dashboard" class="brand-logo left">Bucket List</a>
+            </div>
+            <div class="col m12 s12">
+            <ul id="nav-mobile" class="right">
                 <li>Welcome {{ username }}</li>
                 <li><a ui-sref="logout">Logout</a></li>
             </ul>
+            </div>
         </div>
     </nav>
     <div class="container">
@@ -19,8 +23,9 @@
                                 <div class="col s12">
                                     <input type="text" required placeholder="Bucketlist name" ng-model="newbucket.name" class="validate col s10">
                                     <button class="btn blue darken-3 col s2" type="submit">
-                                        <i class="material-icons">add</i>
+                                        Add
                                     </button>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -31,38 +36,33 @@
         <div class="col s12 m6 l4" data-ng-repeat="bucketlist in Bucketlists">
             <div class="card">
                 <div class="card-content">
-                    <a class="card-title activator">
+                    <a ui-sref="viewBucket({id:bucketlist.id})" class="card-title">
                         {{ bucketlist.name }}
-                    </a>
-                </div>
-                <div class="card-action">
-                    <a class="activator left"><i class="material-icons right">more_vert</i></span></a>
-                    <a ui-sref="viewBucket({id:bucketlist.id})">items</a>
-                    <a ng-click="openModal(bucketlist.id)" class="modal-trigger">
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a ng-click="deleteBucketlist(bucketlist)"><i class="material-icons">delete</i></a>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">
-                        {{ bucketlist.name }}
-                        <i class="material-icons right">close</i>
-                    </span>
+                    </a><br/>
                     <time>Date Created: {{bucketlist.date_created  | amCalendar}}</time><br/>
                     <time>Date Modified: {{bucketlist.date_modified  | amCalendar}}</time>
+                </div>
+                <div class="card-action" >
+                    <a ui-sref="viewBucket({id:bucketlist.id})" tooltipped data-position="bottom" data-delay="50" data-tooltip="Add Items">
+                        <i class="material-icons">add</i>
+                    </a>
+                    <a ng-click="openModal(bucketlist.id)" tooltipped class="modal-trigger" data-position="bottom" data-delay="50" data-tooltip="Edit BucketList">
+                        <i class="material-icons">edit</i>
+                    </a>
+                    <a ng-click="deleteBucketlist(bucketlist)" tooltipped data-position="bottom" data-delay="50" data-tooltip="Delete BucketList"><i class="material-icons">delete</i></a>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
-        <form id="bucket_edit" class="col s12" ng-submit="updateBucketlist(singlebucketlist.id)">
+        <form id="bucket_edit" class="col s12" ng-submit="updateBucketlist(bucketedit.id)">
             <div class="modal-content">
                 <div class="row">
                     <h5 class="center">Edit Bucketlist</h5>
                     <div class="row">
                         <div class="col s12">
-                            <input type="text" required placeholder="{{singlebucketlist.name}}" ng-model="bucketedit.name" class="validate col s10">
+                            <input type="text" required ng-model="bucketedit.name" class="validate col s10">
                             <button class="btn blue darken-3 col s2" type="submit">Update</button>
                         </div>
                     </div>

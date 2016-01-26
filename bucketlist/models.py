@@ -6,7 +6,7 @@ from django.db import models
 
 class BucketList(models.Model):  # on_delete=models.CASCADE
     """Modal class for bucketlist"""
-    name = models.CharField(blank=False, max_length=70)
+    name = models.CharField(blank=False, unique=True, max_length=70)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User)
@@ -18,7 +18,7 @@ class BucketList(models.Model):  # on_delete=models.CASCADE
 
 class BucketListItem(models.Model):
     """Modal class for bucketlist-item"""
-    name = models.CharField(blank=False, max_length=70)
+    name = models.CharField(blank=False, unique=True, max_length=70)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     done = models.BooleanField(default=False)

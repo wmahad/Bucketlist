@@ -2,7 +2,7 @@
 
 
 app.controller('AuthController', 
-	function AuthController($rootScope, $scope, $state, $localStorage, BucketListService) {
+	function AuthController($rootScope, $scope, $state, $localStorage, BucketListService, toastr) {
 
 		var BlService = BucketListService;
 
@@ -17,9 +17,10 @@ app.controller('AuthController',
                 $localStorage.currentUserid = response.id;
 
                 $state.go('dashboard');
+                toastr.success('Welcome ' + $scope.user.username);
             })
             .catch(function(responseError){
-                
+                toastr.error('Invalid credentials');
             });
 
 		};
@@ -30,7 +31,7 @@ app.controller('AuthController',
 		    $promise
 	        .then($scope.login)
 	        .catch(function(responseError){
-	            //console.log(responseError);
+	            toastr.error('Could not register user');
 	        });
 			
 		};

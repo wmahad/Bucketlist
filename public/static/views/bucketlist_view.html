@@ -1,76 +1,82 @@
 <div class="row">
     <nav>
         <div class="nav-wrapper blue darken-3">
-            <a ui-sref="dashboard" class="brand-logo">Bucket List</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <div class="col m12 s12">
+            <a ui-sref="dashboard" class="brand-logo left">Bucket List</a>
+            </div>
+            <div class="col m12 s12">
+            <ul id="nav-mobile" class="right">
                 <li>Welcome {{ username }}</li>
                 <li><a ui-sref="logout">Logout</a></li>
             </ul>
+            </div>
         </div>
     </nav>
     <div class="container">
         <div class="row">
             <div class="container">
-                <h5 class="center">Create New Bucketlist item</h5>
-                <form id="bucket_form" class="col s12" ng-submit="createBucketItem(
-                {
-                    name: newitem.name, 
-                    bucketlist:BucketlistItem.id,
-                    bid:BucketlistItem.id
-                })">
-                    <div class="row">
-                        <div class="container">
-                            <div class="row">
+                <div class="row">
+                    <ul class="collection with-header">
+                        <li class="collection-header">
+                            <form id="bucket_form" ng-submit="createBucketItem(
+                                        {
+                                            name: newitem.name, 
+                                            bucketlist:BucketlistItem.id,
+                                            bid:BucketlistItem.id
+                                        })">
+                                <div class="row">
+                                    <h5 class="center"> {{BucketlistItem.name}} </h5>
+                                    <div class="col s12">
+                                        <input type="text" required placeholder="Bucketlist Item name" ng-model="newitem.name" class="col m8 s8">
+                                        <button class="btn blue darken-3 col m4 s4" type="submit">
+                                            Add Item
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <li class="collection-item" ng-repeat="item in BucketlistItem.items | orderBy:'done'">
+                            <div class="col s11">
                                 <div class="col s12">
-                                    <input type="text" required placeholder="Bucketlist Item name" ng-model="newitem.name" class="col s10">
-                                    <button class="btn blue darken-3 col s2" type="submit">
-                                        <i class="material-icons">add</i>
-                                    </button>
+                                    <span class="left">
+                                    <input type="checkbox" id="{{ item.id }}" ng-model="item.done" ng-change="toggleCompleted(item, item.id, BucketlistItem.id)"/> 
+                                    <label for="{{ item.id }}"></label>
+                                </span>
+                                    <a class="center title">
+                                    {{ item.name }}
+                                </a>
+                                </div>
+                                <div class="col s12">
+                                    <time>Date Created: {{item.date_created | amCalendar}}</time>
+                                    <time>Date Modified: {{item.date_modified | amCalendar}}</time>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="col s12 m6 l4" data-ng-repeat="item in BucketlistItem.items">
-            <div class="card">
-                <div class="card-content">
-                    <a class="card-title activator">
-                        {{ item.name }}
-                    </a>
-                </div>
-                <div class="card-action">
-                    <a class="activator left"><i class="material-icons right">more_vert</i></span></a>
-                    <a ng-click="openItemModal(BucketlistItem.id, item.id)">
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a ng-click="deleteItem({id:item.id, bid:BucketlistItem.id})"><i class="material-icons">delete</i></a>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">
-                        {{ item.name }}
-                        <i class="material-icons right">close</i>
-                    </span>
-                    <time>Date Created: {{bucketlist.date_created  | amCalendar}}</time><br/>
-                    <time>Date Modified: {{bucketlist.date_modified  | amCalendar}}</time>
-                    <br/>
-                    <p>Finished: {{item.done}}</p>
+                            <div class="col s1">
+                                <a ng-click="openItemModal(BucketlistItem.id, item.id)" tooltipped data-position="right" data-delay="50" data-tooltip="Edit Item">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                                <br/>
+                                <a ng-click="deleteItem({id:item.id, bid:BucketlistItem.id})" tooltipped data-position="right" data-delay="50" data-tooltip="Delete Item">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
-        <form class="col s12" id="item_edit" ng-submit="editItem(single_item.id, BucketlistItem.id)">
+        <form id="bucket_edit" class="col s12" id="item_edit" ng-submit="editItem(itemedit.id, BucketlistItem.id)">
             <div class="modal-content">
                 <div class="row">
-                    <h5 class="center">Edit Bucketlist</h5>
-                    <div class="col s12">
-                        <input type="text" required placeholder="{{single_item.name}}" ng-model="itemedit.name" class="validate col s12">
-                        <input type="checkbox" id="finished" ng-model="itemedit.done" />
-                        <label for="finished">Finished</label>
-                        <button class="btn blue darken-3 right" type="submit">Update</button>
+                    <h5 class="center">Edit Item</h5>
+                    <div class="row">
+                        <div class="col s12">
+                            <input type="text" required ng-model="itemedit.name" class="validate col s10">
+                            <button class="btn blue darken-3 col s2" type="submit">Update</button>
+                        </div>
                     </div>
                 </div>
             </div>

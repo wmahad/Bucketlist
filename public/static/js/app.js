@@ -1,14 +1,14 @@
 'use strict';
 
 
-var app = angular.module('BucketListApp', ['ui.router', 'angularMoment', 'ngResource','ngStorage']);
- 
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
- 
+var app = angular.module('BucketListApp', ['ui.router', 'ui.materialize', 'angularMoment', 'ngResource', 'ngStorage', 'toastr']);
+
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+
     $stateProvider
-    
+
     //States for auth
-    .state('signup', {
+        .state('signup', {
         url: '/signup',
         controller: 'AuthController',
         templateUrl: '/static/views/signup.html',
@@ -24,12 +24,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
 
     .state('logout', {
         url: '/logout',
-        controller: function ($rootScope, $state, $localStorage, BucketListService) {
-            BucketListService.UserAuth.logout(function () {
-                $localStorage.$reset();
-                $state.go('signup', {}, {reload:true});
+        controller: function($rootScope, $state, $localStorage) {
+            $localStorage.$reset();
+            $state.go('signup', {}, {
+                reload: true
             });
-            $state.go('signup', {}, {reload:true});
         },
         module: 'private'
     })
@@ -49,7 +48,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
         templateUrl: '/static/views/dashboard.html',
         module: 'private'
     });
-       
+
 
     $urlRouterProvider.otherwise('/signup');
 
@@ -60,25 +59,26 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
 });
- 
-app.run(function($rootScope, $state, $localStorage) {
+
+app.run(function($rootScope, $state, $localStorage, BucketListService) {
+
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+
+
         if (toState.module === 'private' && !$localStorage.authenticated) {
             // If logged out and transitioning to a logged in page:
             event.preventDefault();
-            $state.go('login',{}, {reload:true});
-        } 
+            $state.go('login', {}, {
+                reload: true
+            });
+        }
         if (toState.module === 'public' && $localStorage.authenticated) {
             event.preventDefault();
-            $state.go('dashboard',{}, {reload:true});
+            $state.go('dashboard', {}, {
+                reload: true
+            });
         }
 
     });
 });
-
-
-
-
-
-

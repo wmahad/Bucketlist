@@ -33,7 +33,9 @@
 }
 
 #bucket_form input{
-    border: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     -webkit-border-radius: 3px; 
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -44,7 +46,7 @@
 
 #bucket_form button{
     height: inherit;
-    line-height: 39px;
+    line-height: 44px;
 }
 
 #bucket_form input:focus {
@@ -144,4 +146,17 @@
 
 .card-action {
     font-size: 14px;
+}
+
+
+
+/*second modifications*/
+.collection li:not(.collection-header){
+    min-height: 80px;
+}
+
+#nav-mobile li:first-child {
+    background-color: #1565C0;
+}
+;
 }

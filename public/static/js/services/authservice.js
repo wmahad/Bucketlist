@@ -1,20 +1,20 @@
 'use strict';
 
 app.factory('BucketListService', function ($resource) {
+
     return {
-        auth: $resource('/api/auth/login/', {}, {
+        auth: $resource('/api/api-token-auth/', {}, {
             login: {
                 method: 'POST'
-            }            
+            }           
         },{
             stripTrailingSlashes: false
         }),
-
-        UserAuth: $resource('/api/auth/logout/', {}, {
-            logout: {
-                method: 'GET'
+        verify: $resource('/api/api-token-verify/', {}, {
+            token: {
+                method: 'POST'
             }
-        },{
+        }, {
             stripTrailingSlashes: false
         }),
 
@@ -75,7 +75,7 @@ app.factory('httpRequestInterceptor', function ($localStorage) {
             var token = $localStorage.token;
             config.headers = config.headers || {};
             if (token) {
-                config.headers['Authorization'] = 'Token ' + token;
+                config.headers['Authorization'] = 'JWT ' + token;
             }
             
             return config;

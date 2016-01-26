@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.db import IntegrityError
 
 from faker import Factory
 from django.contrib.auth.models import User
@@ -14,8 +15,8 @@ class UserTests(TestCase):
         """Setting up of the modal for use"""
         self.username = fake.user_name()
         self.password = fake.password()
-        self.user = User(
-            username=self.username,  password=self.password, is_superuser=True)
+        self.user = User.objects.create_user(
+            username=self.username,  password=self.password)
 
     def tearDown(self):
         """Delete the user modal after use"""
@@ -25,6 +26,15 @@ class UserTests(TestCase):
         """Test the creation of a user"""
         self.assertIsInstance(self.user, User)
 
+    def test_super_user_creation_fails(self):
+        """Test the creation of a user fails"""
+        # this should be fixed
+        try:
+            self.user = User.objects.create_user(
+                username=self.username,  password=self.password)
+        except IntegrityError as e:
+            self.assertIn("duplicate key value violates unique constraint", e.message)
+
 
 class BucketListTests(TestCase):
     """Class containing tests for a BucketList Modal"""
@@ -33,7 +43,7 @@ class BucketListTests(TestCase):
         """Setup the test enviroment for the modal"""
         self.username = fake.user_name()
         self.password = fake.password()
-        self.user = User(
+        self.user = User.objects.create_user(
             username=self.username,  password=self.password, is_superuser=True)
         self.name = fake.name()
         self.bucketlist = BucketList(name=self.name, created_by=self.user)
@@ -56,7 +66,7 @@ class BucketListItemTests(TestCase):
         self.i_name = fake.name()
         self.username = fake.user_name()
         self.password = fake.password()
-        self.user = User(
+        self.user = User.objects.create_user(
             username=self.username,  password=self.password, is_superuser=True)
         self.name = fake.name()
         self.bucketlist = BucketList(name=self.name, created_by=self.user)
