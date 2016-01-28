@@ -22,7 +22,7 @@
                             <div class="row">
                                 <div class="col s12">
                                     <input type="text" required placeholder="Bucketlist name" ng-model="newbucket.name" class="validate col s10">
-                                    <button class="btn blue darken-3 col s2" type="submit">
+                                    <button class="btn col s2" type="submit">
                                         Add
                                     </button>
                                     </input>
@@ -36,11 +36,12 @@
         <div class="col s12 m6 l4" data-ng-repeat="bucketlist in Bucketlists">
             <div class="card">
                 <div class="card-content">
-                    <a ui-sref="viewBucket({id:bucketlist.id})" class="card-title">
-                        {{ bucketlist.name }}
-                    </a><br/>
-                    <time>Date Created: {{bucketlist.date_created  | amCalendar}}</time><br/>
-                    <time>Date Modified: {{bucketlist.date_modified  | amCalendar}}</time>
+                    <h4><a ui-sref="viewBucket({id:bucketlist.id})" class="card-title">
+                        {{ bucketlist.name }}</a>
+                    </h4>
+                    <time id="timedisplay">
+                    <i class="material-icons"> query_builder</i> {{bucketlist.date_created  | amCalendar}}
+                    </time>
                 </div>
                 <div class="card-action" >
                     <a ui-sref="viewBucket({id:bucketlist.id})" tooltipped data-position="bottom" data-delay="50" data-tooltip="Add Items">
@@ -63,7 +64,7 @@
                     <div class="row">
                         <div class="col s12">
                             <input type="text" required ng-model="bucketedit.name" class="validate col s10">
-                            <button class="btn blue darken-3 col s2" type="submit">Update</button>
+                            <button class="btn col s2" type="submit">Update</button>
                         </div>
                     </div>
                 </div>

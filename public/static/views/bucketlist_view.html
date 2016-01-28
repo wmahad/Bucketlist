@@ -27,36 +27,29 @@
                                 <div class="row">
                                     <h5 class="center"> {{BucketlistItem.name}} </h5>
                                     <div class="col s12">
-                                        <input type="text" required placeholder="Bucketlist Item name" ng-model="newitem.name" class="col m8 s8">
-                                        <button class="btn blue darken-3 col m4 s4" type="submit">
-                                            Add Item
-                                        </button>
+                                        <input type="text" required placeholder="Bucketlist Item name" ng-model="newitem.name" class="col m10 s10">
+                                        <button class="btn col m2 s2" type="submit">Add</button>
                                     </div>
                                 </div>
                             </form>
                         </li>
                         <li class="collection-item" ng-repeat="item in BucketlistItem.items | orderBy:'done'">
-                            <div class="col s11">
+                            <div class="col s10">
                                 <div class="col s12">
                                     <span class="left">
                                     <input type="checkbox" id="{{ item.id }}" ng-model="item.done" ng-change="toggleCompleted(item, item.id, BucketlistItem.id)"/> 
                                     <label for="{{ item.id }}"></label>
                                 </span>
-                                    <a class="center title">
+                                    <a id="item_text"class="center">
                                     {{ item.name }}
                                 </a>
                                 </div>
-                                <div class="col s12">
-                                    <time>Date Created: {{item.date_created | amCalendar}}</time>
-                                    <time>Date Modified: {{item.date_modified | amCalendar}}</time>
-                                </div>
                             </div>
-                            <div class="col s1">
-                                <a ng-click="openItemModal(BucketlistItem.id, item.id)" tooltipped data-position="right" data-delay="50" data-tooltip="Edit Item">
+                            <div class="col s2">
+                                <a ng-click="openItemModal(BucketlistItem.id, item.id)" tooltipped data-position="bottom" data-delay="50" data-tooltip="Edit Item">
                                     <i class="material-icons">edit</i>
                                 </a>
-                                <br/>
-                                <a ng-click="deleteItem({id:item.id, bid:BucketlistItem.id})" tooltipped data-position="right" data-delay="50" data-tooltip="Delete Item">
+                                <a ng-click="deleteItem({id:item.id, bid:BucketlistItem.id})" tooltipped data-position="bottom" data-delay="50" data-tooltip="Delete Item">
                                     <i class="material-icons">delete</i>
                                 </a>
                             </div>
@@ -75,7 +68,7 @@
                     <div class="row">
                         <div class="col s12">
                             <input type="text" required ng-model="itemedit.name" class="validate col s10">
-                            <button class="btn blue darken-3 col s2" type="submit">Update</button>
+                            <button class="btn col s2" type="submit">Update</button>
                         </div>
                     </div>
                 </div>

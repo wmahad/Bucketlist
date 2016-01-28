@@ -3,17 +3,16 @@
 
 app.controller('BucketListController',
     function BucketListController($rootScope, $scope, $state, $localStorage, $stateParams, BucketListService, toastr) {
-        $(document).ready(function() {
-            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-            $('.modal-trigger').leanModal();
-        });
+        $('.modal-trigger').leanModal();
         var BlService = BucketListService;
 
         $scope.username = $localStorage.currentUser;
 
         //get bucketlist data
         $scope.Bucketlists = BlService.Bucketlists.getAllBuckets();
-
+        $scope.$on('updateBucketData', function () {
+            $scope.Bucketlists = BucketListService.Bucketlists.getAllBuckets();
+        });
 
         $scope.openModal = function(bucketlist_id) {
             $scope.bucketedit = BlService.Bucketlists.getOneBucket({
@@ -30,10 +29,8 @@ app.controller('BucketListController',
             BlService.Bucketlists.createBucket(data)
                 .$promise
                 .then(function(response) {
-                    console.log(response);
-                    $state.go('dashboard', {}, {
-                        reload: true
-                    });
+                    $scope.newbucket.name = null
+                    $scope.$emit('updateBucketData');
                     toastr.success('Bucketlist created successfully');
                 })
                 .catch(function(responseError) {
@@ -46,16 +43,14 @@ app.controller('BucketListController',
         $scope.updateBucketlist = function(_id) {
             var data = {
                 name: $scope.bucketedit.name,
-                // created_by:$cookies.get('id'),
                 id: _id
             };
             console.log(data);
             BlService.Bucketlists.updateBucket(data)
                 .$promise
                 .then(function(response) {
-                    $state.go('dashboard', {}, {
-                        reload: true
-                    });
+                    $scope.bucketedit.name = null
+                    $scope.$emit('updateBucketData');
                     $('#modal1').closeModal();
                     toastr.success('Bucketlist updated successfully');
                 })
@@ -68,9 +63,7 @@ app.controller('BucketListController',
         //delete individual bucketlist
         $scope.deleteBucketlist = function(bucket) {
             bucket.$deleteBucket().then(function() {
-                $state.go('dashboard', {}, {
-                    reload: true
-                });
+                $scope.$emit('updateBucketData');
                 toastr.success('Bucketlist deleted successfully');
             });
         };
@@ -81,9 +74,11 @@ app.controller('BucketListController',
 
 app.controller('BucketListViewController',
     function BucketListViewController($rootScope, $scope, $state, $localStorage, $stateParams, BucketListService, toastr) {
-        $(document).ready(function() {
-            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-            $('.modal-trigger').leanModal();
+        $('.modal-trigger').leanModal();
+        $scope.$on('updateData', function () {
+            $scope.BucketlistItem = BucketListService.Bucketlists.getOneBucket({
+                id: $stateParams.id
+            });
         });
 
         $scope.username = $localStorage.currentUser;
@@ -105,11 +100,8 @@ app.controller('BucketListViewController',
                 .$promise
                 .then(
                     function(response) {
-                        $state.go('viewBucket', {
-                            id: url_params.bid
-                        }, {
-                            reload: true
-                        });
+                        $scope.newitem.name = null
+                        $scope.$emit('updateData');
                         toastr.success('Item created successfully');
                     })
                 .catch(function(responseError) {
@@ -122,11 +114,7 @@ app.controller('BucketListViewController',
                 .$promise
                 .then(
                     function(response) {
-                        $state.go('viewBucket', {
-                            id: url_params.bid
-                        }, {
-                            reload: true
-                        });
+                        $scope.$emit('updateData');
                         toastr.success('Item deleted successfully');
                     }
                 );
@@ -143,11 +131,8 @@ app.controller('BucketListViewController',
                 .$promise
                 .then(
                     function(response) {
-                        $state.go('viewBucket', {
-                            id: b_id
-                        }, {
-                            reload: true
-                        });
+                        $scope.itemedit.name = null;
+                        $scope.$emit('updateData');
                         $('#modal1').closeModal();
                         toastr.success('Item updated successfully');
                     }
@@ -167,11 +152,6 @@ app.controller('BucketListViewController',
                 .$promise
                 .then(
                     function(response) {
-                        $state.go('viewBucket', {
-                            id: b_id
-                        }, {
-                            reload: true
-                        });
                         toastr.success('Item updated successfully');
                     }
                 );

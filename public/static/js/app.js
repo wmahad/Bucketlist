@@ -3,7 +3,10 @@
 
 var app = angular.module('BucketListApp', ['ui.router', 'ui.materialize', 'angularMoment', 'ngResource', 'ngStorage', 'toastr']);
 
-app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, toastrConfig) {
+    angular.extend(toastrConfig, {
+        timeOut: 500,
+    });
 
     $stateProvider
 

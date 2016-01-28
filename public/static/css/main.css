@@ -13,19 +13,32 @@
     min-height: 120px;
 }
 
+.card .card-content h4{
+    margin: 0px;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    padding-top: 0px;
+    color: #03a9f4;
+}
+
 .card .card-action{
-    border-top: 0px;
+    border-top: 1px dotted #cecece;
     padding: 10px;
-    text-align: right;
+    text-align: right;   
+}
+
+#timedisplay{
+    color: #bdbdbd;
+    display: flex;
 }
 
 .card .card-action a{
-    color: #039be5;
+    color: #ccc;
     cursor: pointer;
 }
 
 .card .card-action a:hover{
-    color: #039be5;
+    color: #ff9100;
 }
 
 /*Styles for creating bucketlist and items to a bucketlist*/
@@ -47,6 +60,7 @@
 #bucket_form button{
     height: inherit;
     line-height: 44px;
+    background: #ffab00;
 }
 
 #bucket_form input:focus {
@@ -73,11 +87,13 @@
     height: inherit;
     line-height: 39px;
     margin-top: 15px;
+    background: #ffab00;
 }
 
 #bucket_edit button{
     height: inherit;
     line-height: 44px;
+    background: #ffab00;
 }
 
 #item_edit input:focus , #bucket_edit input:focus {
@@ -114,6 +130,7 @@
 
 #signup_form button {
 	margin-top: 10px;
+    background: #ffab00;
 }
 
 #signup_form .row {
@@ -152,11 +169,22 @@
 
 /*second modifications*/
 .collection li:not(.collection-header){
-    min-height: 80px;
+    min-height: 50px;
+}
+
+.collection .collection-item a{
+    color: #ccc;
+    cursor: pointer;
+}
+
+.collection .collection-item a:hover{
+    color: #ff9100;
+}
+
+#item_text{
+    color: #424242;
 }
 
 #nav-mobile li:first-child {
     background-color: #1565C0;
-}
-;
 }
