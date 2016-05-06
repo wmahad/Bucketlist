@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html ng-app="BucketListApp">
+
+<head>
+    <title>BucketList App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+    <base href="/" /> 
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/angular-toastr.css' %}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/main.css' %}"/>
+</head>
+
+<body>
+    <div ui-view></div>
+
+    <script type="text/javascript" src="{% static 'js/js_libs/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_libs/materialize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_libs/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_libs/angular-ui-route.min.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/js_libs/angular-resource.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_libs/ngStorage.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_libs/moment.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_libs/angular-moment.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_libs/angular-materialize.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_libs/angular-toastr.tpls.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/services/authservice.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/controllers/authcontroller.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/controllers/bucketlistcontroller.js' %}"></script>
+</body>
+
+</html>
